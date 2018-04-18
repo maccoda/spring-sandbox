@@ -20,7 +20,7 @@ class EmployeeController(val service: EmployeeService) {
     }
 
     @PostMapping("/employees/add")
-    fun addEmployee(@RequestBody employeeEntity: EmployeeEntity): String {
+    fun addEmployee(@RequestBody employeeEntity: EmployeeModel): String {
         return service.addEmployee(employeeEntity)
     }
 

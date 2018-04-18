@@ -15,7 +15,7 @@ data class EmployeeEntity(@Id @GeneratedValue(strategy = GenerationType.IDENTITY
                           val lastName: String,
                           @Column(name = "job_title")
                           val jobTitle: String,
-                          @ManyToOne
+                          @ManyToOne(cascade =[CascadeType.ALL])
                           @JoinColumn(name = "company_id")
                           val company: CompanyEntity)
 @Repository

@@ -12,11 +12,13 @@ services:
 
   backend:
     build: .
-    image: cd43f9d24266
+    image: spring-sandbox:latest
     depends_on: 
       - postgres
     ports:
       - '5204:5204'
+    environment: 
+      - DB_HOST=postgres
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5204/health"]
       interval: 1m30s

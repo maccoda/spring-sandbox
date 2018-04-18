@@ -16,10 +16,10 @@ class EmployeeService(val repository: EmployeeRepository) {
     }
 
     @Transactional
-    fun addEmployee(employee: EmployeeEntity): String {
+    fun addEmployee(employee: EmployeeModel): String {
         /* validate that it isn't a duplicate */
         if (repository.findByLastName(employee.lastName).none { it.firstName == employee.firstName }) {
-            repository.save(employee)
+            repository.save(employee.into())
             return "Successfully added employee"
         }
         return "Employee already exists"
