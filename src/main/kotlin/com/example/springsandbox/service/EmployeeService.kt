@@ -1,5 +1,6 @@
 package com.example.springsandbox.service
 
+import com.example.springsandbox.model.EmployeeModel
 import com.example.springsandbox.repository.EmployeeEntity
 import com.example.springsandbox.repository.EmployeeRepository
 import org.springframework.stereotype.Service
@@ -10,8 +11,8 @@ import java.util.*
 @Transactional(readOnly = true)
 class EmployeeService(val repository: EmployeeRepository) {
 
-    fun findAllEmployees(): List<EmployeeEntity> {
-        return repository.findAll().filterNotNull()
+    fun findAllEmployees(): List<EmployeeModel> {
+        return repository.findAllCollapsed().map { EmployeeModel.from(it) }
     }
 
     @Transactional

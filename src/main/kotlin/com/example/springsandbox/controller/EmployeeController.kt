@@ -1,14 +1,16 @@
 package com.example.springsandbox.controller
 
+import com.example.springsandbox.model.EmployeeModel
 import com.example.springsandbox.repository.EmployeeEntity
 import com.example.springsandbox.service.EmployeeService
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 class EmployeeController(val service: EmployeeService) {
 
     @GetMapping("/employees")
-    fun getAllEmployees(): List<EmployeeEntity> {
+    fun getAllEmployees(): List<EmployeeModel> {
         return service.findAllEmployees()
     }
 
@@ -23,8 +25,8 @@ class EmployeeController(val service: EmployeeService) {
     }
 
     @DeleteMapping("/employees/{id}")
-    fun removeEmployee(@PathVariable id: Int): EmployeeEntity {
-        return service.deleteEmployee(id).orElseGet { EmployeeEntity() }
+    fun removeEmployee(@PathVariable id: Int): Optional<EmployeeEntity> {
+        return service.deleteEmployee(id)
     }
 
     @PutMapping("/employees/{id}")
